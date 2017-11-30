@@ -355,12 +355,106 @@
                 <script type="text/javascript">
                 $(function() {
 
+                     var li = function(name, link) {
+                        return [
+                            '<li class="mu"',
+                            'data-maintype=', link,
+                            'data-name=', name,
+                            '>', '<span>', name, '</span>',
+                            '<div id="triangledown"></div>',
+                            '<ul class="submenu">',
+                            '<li class="addsubmenu">+</li>',
+                            '</ul></li>'
+                        ].join(' ');
+                    };
+                    var licurrent = function(name, link) {
+                        return [
+                            '<li class="mu current"',
+                            'data-maintype=', link,
+                            'data-name=', name,
+                            '>', '<span>', name, '</span>',
+                            '<div id="triangledown"></div>',
+                            '<ul class="submenu">',
+                            '<li class="addsubmenu">+</li>',
+                            '</ul></li>'
+                        ].join(' ');
+                    };
+                    var subli = function(name, link) {
+                        return [
+                            '<li',
+                            'data-maintype=', link,
+                            'data-name=', name,
+                            ' class="sublimenu">', '<span>', name, '</span>',
+                            '</li>'
+                        ].join(' ');
+                    };
+
+                       var mulilen = function() {
+                        if ($('.menu .mu').length == 1) {
+                            $('.addmainmu').width('66.5%').addClass('addmainmu-l').show();
+                        } else if ($('.menu .mu').length == 2) {
+                            $('.addmainmu').width('33.2%').show();
+                        } else if ($('.menu .mu').length == 3) {
+                            $('.addmainmu').hide()
+                        } else if ($('.menu .mu').length == 0) {
+                            $('.addmainmu').width('100%')
+                        } else {
+                            alert("亲，主菜单不能超过3个，谢谢合作。")
+                        }
+                    }
+
                     /*初始数据*/
                     var data = [
+                        {
+                            id:1,
+                            name:"1", 
+                            maintype:{
+                                        type:"h5",
+                                        h5:"",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                    },
+                        
+                            sublist:[
+                                {
+                                    id:2,
+                                    subname:"1-2",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.baidu.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 }
+                            ]
+                        }
 
                     ];
                     if (data.length <= 0) {
                         $('.addmainmu').show().siblings('.mu').hide();
+                    }else{
+                        $.each(data, function(index, val) {
+                            var jsonminstr=JSON.stringify(val.maintype);
+                             $('.menu').append(licurrent(val.name,jsonminstr));
+                             mulilen();
+                             if(val.sublist.length>0){
+                                $('.submenu').show();
+                                $.each(val.sublist, function(index, val) {
+                                    var jsonstr=JSON.stringify(val.subtype);
+                                     $('.submenu li:first-child').before(subli(val.subname,jsonstr))
+                                });
+                             }
+                        });
                     }
 
                     $('.subcla').click(function(event) {
@@ -417,46 +511,15 @@
 
                      */
 
-                    var li = function(name, link) {
-                        return [
-                            '<li class="mu"',
-                            'data-maintype=', link,
-                            'data-name=', name,
-                            '>', '<span>', name, '</span>',
-                            '<div id="triangledown"></div>',
-                            '<ul class="submenu">',
-                            '<li class="addsubmenu">+</li>',
-                            '</ul></li>'
-                        ].join(' ');
-                    };
-                    var subli = function(name, link) {
-                        return [
-                            '<li',
-                            'data-maintype=', link,
-                            'data-name=', name,
-                            ' class="sublimenu">', '<span>', name, '</span>',
-                            '</li>'
-                        ].join(' ');
-                    };
+                   
                     $('.addmainmu').click(function(event) {
                         $('.addedit').show();
                         $('.edittxt').hide();
                         $('.addedit input').val('');
                         $('.addedit').attr('ismenu', '1');
+                        // $('.submenu').hide();
                     });
-                    var mulilen = function() {
-                        if ($('.menu .mu').length == 1) {
-                            $('.addmainmu').width('66.5%').addClass('addmainmu-l').show();
-                        } else if ($('.menu .mu').length == 2) {
-                            $('.addmainmu').width('33.2%').show();
-                        } else if ($('.menu .mu').length == 3) {
-                            $('.addmainmu').hide()
-                        } else if ($('.menu .mu').length == 0) {
-                            $('.addmainmu').width('100%')
-                        } else {
-                            alert("亲，主菜单不能超过3个，谢谢合作。")
-                        }
-                    }
+                 
 
 
 
@@ -600,6 +663,9 @@
                         event.stopPropagation();
 
                         var str = $(this).data('maintype');
+                         if ($.type(str) == 'string') {
+                            str = jQuery.parseJSON(str)
+                        }
                         $('.addedit').attr('ismenu', '3');
                         if ($(this).hasClass('mu')) {
                             $('.addedit').attr('flag', 'm');
@@ -617,9 +683,7 @@
                         $('#menuname').val(name);
                         $('.addedit').show();
                         $('.edittxt').hide();
-                        if ($.type(str) == 'string') {
-                            str = jQuery.parseJSON(str)
-                        }
+                       
                        var  checkEl = $('#' + str.type),
                             classEl = $('.' + str.type);
                         switch (str.type) {
