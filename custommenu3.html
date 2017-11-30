@@ -404,7 +404,7 @@
                     }
 
                     /*初始数据*/
-                    var data = [
+                        var data = [
                         {
                             id:1,
                             name:"1", 
@@ -422,7 +422,22 @@
                         
                             sublist:[
                                 {
-                                    id:2,
+                                    id:11,
+                                    subname:"1-1",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.baidu.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 },
+                                  {
+                                    id:12,
                                     subname:"1-2",
                                     subtype:{
                                         type:"h5",
@@ -437,25 +452,177 @@
                                      }
                                  }
                             ]
+                        },
+                        {
+                            id:2,
+                            name:"2", 
+                            maintype:{
+                                        type:"h5",
+                                        h5:"",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                    },
+                        
+                            sublist:[
+                                {
+                                    id:21,
+                                    subname:"2-1",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.baidu.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 },
+                                 {
+                                    id:22,
+                                    subname:"2-2",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.baidu.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 }
+                            ]
+                        },
+                          {
+                            id:3,
+                            name:"3", 
+                            maintype:{
+                                        type:"h5",
+                                        h5:"",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                    },
+                        
+                            sublist:[
+                                {
+                                    id:31,
+                                    subname:"3-1",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.3333.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 },
+                                 {
+                                    id:31,
+                                    subname:"3-1",
+                                    subtype:{
+                                        type:"h5",
+                                        h5:"http://www.444.com",
+                                        imgtxt:"",
+                                        feast:"",
+                                        online:{
+                                            name:"",
+                                            imghead:"",
+                                            autoreply:""
+                                        }
+                                     }
+                                 }
+                            ]
                         }
 
                     ];
+
+
+
                     if (data.length <= 0) {
                         $('.addmainmu').show().siblings('.mu').hide();
                     }else{
+                        var subArray=[];
                         $.each(data, function(index, val) {
                             var jsonminstr=JSON.stringify(val.maintype);
                              $('.menu').append(licurrent(val.name,jsonminstr));
                              mulilen();
-                             if(val.sublist.length>0){
-                                $('.submenu').show();
-                                $.each(val.sublist, function(index, val) {
-                                    var jsonstr=JSON.stringify(val.subtype);
-                                     $('.submenu li:first-child').before(subli(val.subname,jsonstr))
-                                });
-                             }
+                             subArray.push(val.sublist)
                         });
+                        // console.log(subArray);
+
+                        $(".submenu").each(function(i){
+                            // console.log(subArray[i])
+                            var _this=$(this)
+                            $.each(subArray[i],function(a,b){
+var jsonstr=JSON.stringify(b.subtype);
+                                console.log(b)
+                               _this.children('li:first-child').before(subli(b.subname,jsonstr));
+                            })
+                            // var jsonstr=JSON.stringify(subArray[i].subtype);
+                            // $(this).children('li:first-child').before(subli(subArray[i].subArray[i],jsonstr))
+                            
+                        })
+
+
+                        // $.each(subArray, function(i, n){
+                        //     console.log(n)
+                        //     $.each(n, function(j, m){
+                        //         console.log(m)
+
+                        //         // if(j < n.length - 1) 
+                        //         // {
+                        //             var jsonstr=JSON.stringify(m.subtype);
+                        //             $('.submenu li:first-child').before(subli(m.subname,jsonstr))
+                        //         // }
+                        //     });
+
+                        // });
+
+                        $('.menu li.mu').eq(0).siblings('li').removeClass('current')
                     }
+
+
+
+                    // if (data.length <= 0) {
+                    //     $('.addmainmu').show().siblings('.mu').hide();
+                    // }else{
+                    //     $.each(data, function(index, val) {
+                    //         var jsonminstr=JSON.stringify(val.maintype);
+                    //          $('.menu').append(licurrent(val.name,jsonminstr));
+                    //          mulilen();
+                    //          if(val.sublist.length>0){                  
+                    //             $.each(val.sublist, function(i, v) {
+
+                    //                 console.log(v)
+                    //                 // console.log(v)
+                    //                 // console.log(val.length)
+                    //                 // if(i < val.length - 1){
+                    //                 //     var jsonstr=JSON.stringify(v.subtype);
+                    //                 //     $('.submenu li:first-child').before(subli(v.subname,jsonstr))
+                    //                 //  }
+
+
+                    //             });
+                    //          }
+                    //     });
+                    //     $('.menu li.mu').eq(0).siblings('li').removeClass('current')
+                    // }
 
                     $('.subcla').click(function(event) {
                         var inx = $(this).index() - 1;
