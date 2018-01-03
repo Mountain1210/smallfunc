@@ -220,7 +220,7 @@
         padding: 8px;
     }
     
-    .showmenudetial .submain .submaincheck .h5 {
+    .showmenudetial .submain .submaincheck .jumpurl {
         font-family: "微软雅黑"
     }
     
@@ -252,27 +252,27 @@
         margin-bottom: 0px;
     }
     
-    .imgtxt ul {
+    .interact ul {
         overflow: hidden
     }
     
-    .showmenudetial .submain .submaincheck .imgtxt img {
+    .showmenudetial .submain .submaincheck .interact img {
         height: 100px;
         width: 80px;
     }
     
-    .showmenudetial .submain .submaincheck .imgtxt li {
+    .showmenudetial .submain .submaincheck .interact li {
         margin-right: 16px;
         width: 80px;
         float: left;
         border: 1px solid #e4e4e4;
     }
     
-    .showmenudetial .submain .submaincheck .imgtxt li.check {
+    .showmenudetial .submain .submaincheck .interact li.check {
         border: 1px solid #ff0000;
     }
     
-    .showmenudetial .submain .submaincheck .imgtxt li p {
+    .showmenudetial .submain .submaincheck .interact li p {
         text-align: center;
         margin-bottom: 0px!important
     }
@@ -337,15 +337,6 @@
                         <div class="phonejp l">键</div>
                         <ul class="menu l">
                             <li class="addmainmu">+添加菜单</li>
-                            <!--                                 <li class="mu">嘉华服务
-<div id="triangledown">1</div>
-                                <ul class="submenu">
-                                    <li>1</li>
-                                    <li>2</li>
-                                    <li class="addsubmenu">+</li>
-                                </ul></li> -->
-                            <!--      <li  class="mu">嘉华活动</li>
-                                <li  class="mu">联系我们</li> -->
                         </ul>
                     </div>
                     <div class="phonefoot">
@@ -402,22 +393,15 @@
                             alert("亲，主菜单不能超过3个，谢谢合作。")
                         }
                     }
-
-                    /*初始数据*/
                         var data = [
                         {
                             id:1,
                             name:"1", 
                             maintype:{
-                                        type:"h5",
-                                        h5:"",
-                                        imgtxt:"",
-                                        feast:"",
-                                        online:{
-                                            name:"",
-                                            imghead:"",
-                                            autoreply:""
-                                        }
+                                        type:"jumpurl",
+                                        jumpurl:"",
+                                        interact:"",
+                                        phonenum:""
                                     },
                         
                             sublist:[
@@ -425,30 +409,20 @@
                                     id:11,
                                     subname:"1-1",
                                     subtype:{
-                                        type:"h5",
-                                        h5:"http://www.baidu.com",
-                                        imgtxt:"",
-                                        feast:"",
-                                        online:{
-                                            name:"",
-                                            imghead:"",
-                                            autoreply:""
-                                        }
+                                        type:"jumpurl",
+                                        jumpurl:"http://www.baidu.com",
+                                        interact:"",
+                                        phonenum:""
                                      }
                                  },
                                   {
                                     id:12,
                                     subname:"1-2",
                                     subtype:{
-                                        type:"h5",
-                                        h5:"http://www.baidu.com",
-                                        imgtxt:"",
-                                        feast:"",
-                                        online:{
-                                            name:"",
-                                            imghead:"",
-                                            autoreply:""
-                                        }
+                                        type:"jumpurl",
+                                        jumpurl:"http://www.baidu.com",
+                                        interact:"",
+                                        phonenum:""
                                      }
                                  }
                             ]
@@ -457,15 +431,10 @@
                             id:2,
                             name:"2", 
                             maintype:{
-                                        type:"h5",
-                                        h5:"",
-                                        imgtxt:"",
-                                        feast:"",
-                                        online:{
-                                            name:"",
-                                            imghead:"",
-                                            autoreply:""
-                                        }
+                                        type:"jumpurl",
+                                        jumpurl:"",
+                                        interact:"",
+                                        phonenum:""
                                     },
                         
                             sublist:[
@@ -473,25 +442,20 @@
                                     id:21,
                                     subname:"2-1",
                                     subtype:{
-                                        type:"h5",
-                                        h5:"http://www.baidu.com",
-                                        imgtxt:"",
-                                        feast:"",
-                                        online:{
-                                            name:"",
-                                            imghead:"",
-                                            autoreply:""
-                                        }
+                                        type:"jumpurl",
+                                        jumpurl:"http://www.baidu.com",
+                                        interact:"",
+                                        phonenum:""
                                      }
                                  },
                                  {
                                     id:22,
                                     subname:"2-2",
                                     subtype:{
-                                        type:"h5",
-                                        h5:"http://www.baidu.com",
-                                        imgtxt:"",
-                                        feast:"",
+                                        type:"jumpurl",
+                                        jumpurl:"http://www.baidu.com",
+                                        interact:"",
+                                        phonenum:"",
                                         online:{
                                             name:"",
                                             imghead:"",
@@ -513,8 +477,7 @@
                         $.each(data, function(index, val) {
                             var jsonminstr=JSON.stringify(val.maintype);
                              $('.menu').append(licurrent(val.name,jsonminstr));
-                             mulilen();
-                             subArray.push(val.sublist);
+                             mulilen();subArray.push(val.sublist);
                         });
                         $(".submenu").each(function(i){
                             var _this=$(this)
@@ -530,63 +493,15 @@
                         var inx = $(this).index() - 1;
                         $('.subtype').eq(inx).show().siblings().hide();
                     });
-                    $('.imgtxt li').click(function(event) {
+                    $('.interact li').click(function(event) {
                         $(this).addClass('check').siblings().removeClass('check')
                     });
-
-                    /***
-                        {
-                            id:,//主菜单id
-                            name:, //主菜单名称,
-                            maintype:{//主菜单类型
-                                        type:,
-                                        h5:,
-                                        imgtxt:,
-                                        feast:,
-                                        online:{
-                                            name:,
-                                            imghead:,
-                                            autoreply:
-                                        }
-                                    },
-
-                            sublist:[//子菜单
-                                {
-                                    id:,//子菜单id
-                                    subname:,//子菜单名称,
-                                    subtype:{//子菜单类型
-                                        type:,
-                                        h5:,
-                                        imgtxt:,
-                                        feast:,
-                                        online:{
-                                            name:,
-                                            imghead:,
-                                            autoreply:
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-
-
-                            
-
-
-                       
-
-                        var subname=$('.subname input').val();//子菜单名称
-                       $('.subcla input[name="nr"]:checked').parent().attr("id"); //获取子菜单类型
-
-                     */
-
                    
                     $('.addmainmu').click(function(event) {
                         $('.addedit').show();
                         $('.edittxt').hide();
                         $('.addedit input').val('');
                         $('.addedit').attr('ismenu', '1');
-                        // $('.submenu').hide();
                     });
                  
 
@@ -594,7 +509,6 @@
 
                     var insertEL= function(subname,maintype,menutype,$menu){
                              var jsonmaintype = JSON.stringify(maintype)
-                             console.log(jsonmaintype)
                                 if (menutype == 1) {
                                     if ($('.menu .mu').length == 3) {
                                         alert('“主菜单最多填3个”');
@@ -613,19 +527,12 @@
                                     $('.menu li.current').children('ul').find('li.sublimenu').eq(len-1).addClass('check1').siblings('.sublimenu').removeClass('check1')
                                     $('.phonmenu .menu .current').addClass('sl')
                                 } else {
-                            //        alert(3)
                                     var isflag = $('.addedit').attr('flag');
-                                    console.log($menu)
                                     if (isflag == 'm') {
                                         $menu.children('span').html(subname)
-                                        alert("====111111")
-                                        console.log(jsonmaintype)
-                                        console.log($menu)
                                         $menu.data('maintype', jsonmaintype).data('name', subname)
                                     } else {
                                         $menu.children('ul').children('.check1').html(subname);
-                                        alert("=====")
-                                        console.log(jsonmaintype)
                                         $menu.children('ul').children('.check1').data('maintype', jsonmaintype).data('name', subname)
                                     }
                                 }
@@ -635,15 +542,7 @@
                             layer.alert('当前场景不可保存')
                             return false;
                         }
-                        var menutype = $('.addedit').attr('ismenu');
-                        var currentid = $('.subcla input[name="nr"]:checked').parent().attr("id");
-                        var mainjson = {}
-                        var subname = $('#menuname').val();
-             
-                       var En =subname.replace(/[^A-Za-z1-9]/ig,"");
-                       var Cn =subname.replace(/[^\u4e00-\u9fa5]/gi,"");
-                       var cnlen=Cn.length;
-                       var enlen=En.length;
+                        var menutype = $('.addedit').attr('ismenu'),currentid = $('.subcla input[name="nr"]:checked').parent().attr("id"),mainjson = {},subname = $('#menuname').val(),En =subname.replace(/[^A-Za-z1-9]/ig,""),Cn=subname.replace(/[^\u4e00-\u9fa5]/gi,""),cnlen=Cn.length,enlen=En.length;
                        if(enlen>8){
                             layer.alert('英文不能超8个')
                             return false;
@@ -657,66 +556,48 @@
                         var currentEl = $('.' + currentid);
                         var $menu = $('.menu').find('.current');
                         switch (currentid) {
-                            case 'h5':
-                                var h5link = currentEl.find('input').val();
-                                // console.log(h5link);
+                            case 'jumpurl':
+                                var jumpurllink = currentEl.find('input').val();
                                 maintype = {
                                     type: currentid,
-                                    h5: h5link,
-                                    imgtxt: null,
-                                    feast: null,
-                                    online: {
-                                        name: null,
-                                        imghead: null,
-                                        autoreply: null
-                                    }
+                                    jumpurl: jumpurllink,
+                                    interact: null,
+                                    phonenum: null
                                 }
                                 insertEL(subname,maintype,menutype,$menu);
                                 break;
-                            case 'imgtxt':
-                                var getliinx = currentEl.find('li.check').index();
-                                maintype = {
-                                    type: currentid,
-                                    h5: null,
-                                    imgtxt: getliinx,
-                                    feast: null,
-                                    online: {
-                                        name: null,
-                                        imghead: null,
-                                        autoreply: null
-                                    }
-                                }
-                              insertEL(subname,maintype,menutype,$menu);
+                            case 'interact':
+                                   var getliinx = currentEl.find('select').val();
+                                   maintype = {
+                                       type: currentid,
+                                       jumpurl: null,
+                                       interact: getliinx,
+                                       phonenum: null
+                                   }
+                                insertEL(subname,maintype,menutype,$menu);
                                 break;
-                            case 'feast':
-                                var getliinx = currentEl.find('select').val();
-                                console.log(getliinx);
-                                maintype = {
-                                    type: currentid,
-                                    h5: null,
-                                    imgtxt: null,
-                                    feast: getliinx,
-                                    online: {
-                                        name: null,
-                                        imghead: null,
-                                        autoreply: null
-                                    }
-                                }
-                             insertEL(subname,maintype,menutype,$menu);
-                                break;
+                            // case 'phonenum':
+                            //     var getliinx = currentEl.find('select').val();
+                            //     maintype = {
+                            //         type: currentid,
+                            //         jumpurl: null,
+                            //         interact: null,
+                            //         phonenum: getliinx,
+                            //         online: {
+                            //             name: null,
+                            //             imghead: null,
+                            //             autoreply: null
+                            //         }
+                            //     }
+                            //  insertEL(subname,maintype,menutype,$menu);
+                            //     break;
                             default:
                                 var zxkfname = currentEl.find('.zxkfname').val();
-                                var autoreplytxt = currentEl.find('.inpureply').val();
                                 maintype = {
                                     type: currentid,
-                                    h5: null,
-                                    imgtxt: null,
-                                    feast: null,
-                                    online: {
-                                        name: zxkfname,
-                                        imghead: null,
-                                        autoreply: autoreplytxt
-                                    }
+                                    jumpurl: null,
+                                    interact: null,
+                                    phonenum: zxkfname
                                 }
                                 insertEL(subname,maintype,menutype,$menu);
                         }
@@ -731,8 +612,6 @@
                     }
                     $('.menu').delegate('.mu, .sublimenu', 'click', function(event) {
                         event.stopPropagation();
-                        $('.submaincheck').find('input').val('');
-                        $('.submaincheck').find('select').val('2017');
                         var str = $(this).data('maintype');
                          if ($.type(str) == 'string') {
                             str = jQuery.parseJSON(str)
@@ -755,26 +634,23 @@
                         $('.addedit').show();
                         $('.edittxt').hide();
                        
-                       var  checkEl = $('#' + str.type),
-                            classEl = $('.' + str.type);
-                            console.log(str.feast)
+                       var  checkEl = $('#' + str.type),classEl = $('.' + str.type);
+                       console.log(str)
                         switch (str.type) {
-                            case 'h5':
+                            case 'jumpurl':
                                 checkclass(checkEl, classEl)
-                                classEl.find('input').val(str.h5);
+                                classEl.find('input').val(str.jumpurl);
                                 break;
-                            case 'imgtxt':
+                            case 'interact':
+                                // checkclass(checkEl, classEl)
+                                // classEl.find('li').eq(str.interact).addClass('check').siblings().removeClass('check')
                                 checkclass(checkEl, classEl)
-                                classEl.find('li').eq(str.imgtxt).addClass('check').siblings().removeClass('check')
-                                break;
-                            case 'feast':
-                                checkclass(checkEl, classEl)
-                                classEl.children().children("select").val(str.feast);
+                                classEl.find("select").val(str.interact);
                                 break;
                             default:
                                 checkclass(checkEl, classEl);
-                                classEl.find(".zxkfname").val(str.online.name);
-                                classEl.find(".inpureply").val(str.online.autoreply);
+                                console.log(classEl)
+                                classEl.find(".zxkfname").val(str.phonenum);
                         }
                     });
 
@@ -828,38 +704,17 @@
                             </li>
                  
                             <li class="submain"><span></span>菜单内容：
-                                <span id="h5" class="subcla"><input id="one" type="radio" name="nr" value="h5" checked  placeholder="H5链接"><label for="one">H5链接</label></span>
-                                <span id="imgtxt" class="subcla"><input id="two" type="radio" name="nr" value="图文模板"  placeholder="图文模板"><label for="two">图文模板</label></span>
-                                <span id="feast" class="subcla"><input id="three" type="radio" name="nr" value="活动" placeholder="活动"><label for="three">活动</label></span>
-                                <span id="online" class="subcla"><input id="four" type="radio" name="nr" value="在线客服" placeholder="在线客服"><label for="four">在线客服</label></span>
+                                <span id="jumpurl" class="subcla"><input id="one" type="radio" name="nr" value="jumpurl" checked  placeholder="跳转链接"><label for="one">跳转链接</label></span>
+                                <span id="interact" class="subcla"><input id="two" type="radio" name="nr" value="图文模板"  placeholder="互动服务"><label for="two">互动服务</label></span>
+                                <span id="phonenum" class="subcla"><input id="three" type="radio" name="nr" value="活动" placeholder="联系电话"><label for="three">联系电话</label></span>
                                 <div class="submaincheck">
-                                    <div class="subtype h5" style="display:block;">
+                                    <div class="subtype jumpurl" style="display:block;">
                                         <p>用户点击该基金后会跳转到以下链接</p>
                                         <div class="">页面地址:
                                             <input type="text" name="" value="" placeholder="">
                                         </div>
                                     </div>
-                                    <div class="subtype imgtxt" style="display:none;">
-                                        <ul>
-                                            <li>
-                                                <img>
-                                                <p>空的</p>
-                                            </li>
-                                            <li>
-                                                <img>
-                                                <p>上文下图</p>
-                                            </li>
-                                            <li>
-                                                <img>
-                                                <p>上下文中图</p>
-                                            </li>
-                                            <li>
-                                                <img>
-                                                <p>上文下图</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="subtype feast" style="display:none;">
+                                    <div class="subtype  interact" style="display:none;">
                                         <p>可以绑定已发布的活动，用户点击此菜单可以跳转至相应活动页面</p>
                                         <div class="">　　活动:
                                             <select name="">
@@ -870,22 +725,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="subtype online" style="display:none;">
+                                    <div class="subtype phonenum" style="display:none;">
+                                     <p>提供真实有效的企业联系电话，区域性特服号码或固话需提供对应的区号
+
+</p>
                                         <ul>
-                                            <li style="overflow:hidden">在线客服:
+                                            <li style="overflow:hidden">联系电话:
                                                 <input type="
-                                        " name="" value="" class="zxkfname" placeholder="">
-                                            </li>
-                                            <li style="overflow:hidden; line-height:80px">
-                                                <p class="headset">头像设置:</p>
-                                                <div>
-                                                    <p class="imghead"></p>
-                                                    <p class="imgadd">+</p>
-                                                </div>
-                                            </li>
-                                            <li>自动回复:
-                                                <input class="inpureply" type="
-                                        " name="" value="" placeholder="你好，请问有什么可以帮助您？">
+                                        " name="" value="" class="zxkfname" placeholder="请输入企业官方联系电话">
                                             </li>
                                         </ul>
                                     </div>
@@ -896,8 +743,10 @@
                     <div class="edittxt" style="text-align:center; line-height:460px">点击左边进行编辑</div>
                 </div>
                 <div class="btnContent">
+
+                <button type="">保存并提交审核</button>
                     <button type="" class="" id="save">预览</button>
-                    <button type="">保存并提交审核</button>
+                    
                 </div>
             </div>
         </div>
