@@ -332,7 +332,7 @@
             <div class="phoneoperate">
                 <div class="phone">
                     <div class="tingt"></div>
-                    <div class="phonmain"></div>
+                    <div class="phonmain"><iframe src="backtop.html" frameborder="0" scrolling="yes" id="frame" style="min-height:415px"></iframe></div>
                     <div class="phonmenu clearfix">
                         <div class="phonejp l">键</div>
                         <ul class="menu l">
@@ -613,17 +613,25 @@
                     $('.menu').delegate('.mu, .sublimenu', 'click', function(event) {
                         event.stopPropagation();
                         var str = $(this).data('maintype');
+                        $('.submaincheck').find('input').val('');
+                        $('.submaincheck').find('select').val(' ');
+
+               
                          if ($.type(str) == 'string') {
                             str = jQuery.parseJSON(str)
                         }
+
+                        console.table(str)
                         $('.addedit').attr('ismenu', '3');
                         if ($(this).hasClass('mu')) {
                             $('.addedit').attr('flag', 'm');
                             $(this).addClass('current').siblings().removeClass('current');
                            $(this).removeClass('sl');
                             $(this).children().children().removeClass('check1');
-                            $(this).removeClass('class name')
+                            $(this).removeClass('class name');                  
+                            
                         } else {
+                  
                             $('.addedit').attr('flag', 's');
                             $(this).addClass('check1').siblings('.sublimenu').removeClass('check1');
                             $(this).parent().parent().addClass('sl')
@@ -635,16 +643,18 @@
                         $('.edittxt').hide();
                        
                        var  checkEl = $('#' + str.type),classEl = $('.' + str.type);
-                       console.log(str)
+            
                         switch (str.type) {
                             case 'jumpurl':
                                 checkclass(checkEl, classEl)
+                                $('#frame').attr('src',str.jumpurl);
                                 classEl.find('input').val(str.jumpurl);
                                 break;
                             case 'interact':
                                 // checkclass(checkEl, classEl)
                                 // classEl.find('li').eq(str.interact).addClass('check').siblings().removeClass('check')
-                                checkclass(checkEl, classEl)
+                                checkclass(checkEl, classEl);
+                                 $('#frame').attr('src',str.interact);
                                 classEl.find("select").val(str.interact);
                                 break;
                             default:
@@ -718,10 +728,11 @@
                                         <p>可以绑定已发布的活动，用户点击此菜单可以跳转至相应活动页面</p>
                                         <div class="">　　活动:
                                             <select name="">
-                                                <option value="中秋大礼包２０１７">中秋大礼包２０１７</option>
-                                                <option value="中秋大礼包２０１８">中秋大礼包２０１８</option>
-                                                <option value="中秋大礼包２０１９">中秋大礼包２０１９</option>
-                                                <option value="中秋大礼包２０２０">中秋大礼包２０２０</option>
+                                            <option value=" "></option>
+                                                <option value="http://m.baidu.com">中秋大礼包２０１７</option>
+                                                <option value="http://m.163.com">中秋大礼包２０１８</option>
+                                                <option value="http://m.sina.com">中秋大礼包２０１９</option>
+                                                <option value="http://m.taobao.com">中秋大礼包２０２０</option>
                                             </select>
                                         </div>
                                     </div>
